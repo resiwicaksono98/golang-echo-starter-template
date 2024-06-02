@@ -1,24 +1,23 @@
 package repository
 
-import "github.com/google/uuid"
+import (
+	"echo-starter-template/internal/domain"
+
+	"github.com/google/uuid"
+)
 
 type User struct {
 	ID   uuid.UUID
 	Name string
 }
 
-type UserRepository interface {
-	FindAll() ([]User, error)
-}
-
 type userRepository struct {
 }
 
-func NewUserRepository() UserRepository {
+func NewUserRepository() domain.UserRepository {
 	return &userRepository{}
 }
 
-func (r *userRepository) FindAll() ([]User, error) {
-	// Implementasi query untuk mendapatkan semua user
-	return []User{{ID: uuid.New(), Name: "John Doe"}}, nil
+func (r *userRepository) FindAll() ([]domain.User, error) {
+	return []domain.User{{ID: uuid.New(), Name: "John Doe"}}, nil
 }

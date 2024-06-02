@@ -1,19 +1,17 @@
 package service
 
-import "echo-starter-template/internal/adapter/repository"
+import (
+	"echo-starter-template/internal/domain"
+)
 
-type UserService interface {
-	FindAll() ([]repository.User, error)
+type UserService struct {
+	repo domain.UserRepository
 }
 
-type userService struct {
-	repo repository.UserRepository
+func NewUserService(repo domain.UserRepository) *UserService {
+	return &UserService{repo: repo}
 }
 
-func NewUserService(repo repository.UserRepository) UserService {
-	return &userService{repo: repo}
-}
-
-func (s *userService) FindAll() ([]repository.User, error) {
+func (s *UserService) FindAll() ([]domain.User, error) {
 	return s.repo.FindAll()
 }
